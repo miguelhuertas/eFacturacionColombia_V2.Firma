@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{84B87815-DD45-4C60-B343-C11D45847BDF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>FirmaXadesNet</RootNamespace>
+    <AssemblyName>FirmaXadesNet</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.5.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\..\packages\BouncyCastle.1.8.5\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Clients\ITimeStampClient.cs" />
+    <Compile Include="Signature\Parameters\DataFormat.cs" />
+    <Compile Include="Upgraders\Parameters\OcspServer.cs" />
+    <Compile Include="Utils\ManifestUtil.cs" />
+    <Compile Include="Utils\OcspReqGeneratorExtensions.cs" />
+    <Compile Include="Crypto\CryptoConst.cs" />
+    <Compile Include="Crypto\DigestMethod.cs" />
+    <Compile Include="Crypto\SignatureMethod.cs" />
+    <Compile Include="Crypto\Signer.cs" />
+    <Compile Include="Signature\Parameters\SignatureCommitment.cs" />
+    <Compile Include="Signature\Parameters\SignatureCommitmentType.cs" />
+    <Compile Include="Signature\Parameters\SignatureProductionPlace.cs" />
+    <Compile Include="Signature\Parameters\SignerRole.cs" />
+    <Compile Include="Upgraders\XadesUpgraderService.cs" />
+    <Compile Include="Validation\ValidationResult.cs" />
+    <Compile Include="Validation\XadesValidator.cs" />
+    <Compile Include="XadesService.cs" />
+    <Compile Include="Clients\OcspClient.cs" />
+    <Compile Include="Signature\Parameters\SignatureXPathExpression.cs" />
+    <Compile Include="Signature\Parameters\SignatureParameters.cs" />
+    <Compile Include="Signature\Parameters\SignaturePolicyInfo.cs" />
+    <Compile Include="Upgraders\Parameters\UpgradeParameters.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Clients\TimeStampClient.cs" />
+    <Compile Include="Signature\SignatureDocument.cs" />
+    <Compile Include="Upgraders\XadesTUpgrader.cs" />
+    <Compile Include="Upgraders\IXadesUpgrader.cs" />
+    <Compile Include="Upgraders\XadesXLUpgrader.cs" />
+    <Compile Include="Utils\CertUtil.cs" />
+    <Compile Include="Utils\X509Certificate2Extensions.cs" />
+    <Compile Include="Utils\DigestUtil.cs" />
+    <Compile Include="Utils\XMLUtil.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Microsoft.Xades\Microsoft.Xades.csproj">
+      <Project>{ee1dc57a-344a-4b0a-82ce-5fd328c14894}</Project>
+      <Name>Microsoft.Xades</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
