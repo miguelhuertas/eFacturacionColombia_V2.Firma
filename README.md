@@ -70,7 +70,7 @@ Miguel Huertas <contacto@miguel-huertas.net>
 
 ### Licencia
 
-Revisar detalles en el archivo [LICENCE](LICENCE).
+Revisar detalles en el archivo [LICENSE](LICENSE.txt).
 
 
 
