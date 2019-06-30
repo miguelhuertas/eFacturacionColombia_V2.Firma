@@ -59,7 +59,7 @@ File.WriteAllBytes("path/to/signed-debit-note.xml", notaDebitoFirmada);
 var xmlEvento = File.ReadAllText("path/to/unsigned-application-response.xml");
 var eventoFirmado = firma.FirmarEvento(xmlEvento, fecha);
 // guardar xml firmado
-File.WriteAllBytes("path/to/signed-application-response.xml");
+File.WriteAllBytes("path/to/signed-application-response.xml", eventoFirmado);
 
 ```
 
