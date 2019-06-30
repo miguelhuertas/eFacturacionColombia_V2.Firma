@@ -4,7 +4,7 @@
 
 
 
-**eFacturacionColombia_V2.Firma** es un módulo desarrollado en C#, que permite firmar los documentos XML (facturas y notas de crédito/débito) que se presentan a la DIAN de Colombia para el proceso de facturación electrónica (versión Validación Previa).
+**eFacturacionColombia_V2.Firma** es un módulo desarrollado en C#, que permite firmar los documentos XML (facturas, notas de crédito/débito y eventos) que se presentan a la DIAN de Colombia para el proceso de facturación electrónica (versión Validación Previa).
 
 
 
@@ -17,6 +17,7 @@ La clase `FirmaElectronica` contiene un sencillo método (en tres variantes) par
 // namespace del módulo
 using eFacturacionColombia_V2.Firma
 
+
 // crear instancia
 var firma = new FirmaElectronica
 {
@@ -28,23 +29,37 @@ var firma = new FirmaElectronica
 // usar horario colombiano
 var fecha = DateTime.Now;
 
+
 // factura, variante 1:
 // firmar archivo (FileInfo)
 var archivoXml = new FileInfo("path/to/unsigned-invoice.xml");
 var facturaFirmada = firma.FirmarFactura(archivoXml, fecha);
+// guardar xml firmado
+File.WriteAllBytes(facturaFirmada, "path/to/signed-invoice.xml");
+
 
 // nota de crédito, variante 2:
 // firmar contenido xml (string)
 var contenidoXml = File.ReadAllText("path/to/unsigned-credit-note.xml");
 var notaCreditoFirmada = firma.FirmarNotaCredito(contenidoXml, fecha);
+// guardar xml firmado
+File.WriteAllBytes(notaCreditoFirmada, "path/to/signed-credit-note.xml");
+
 
 // nota de débito, variante 3:
 // firmar array de bytes (byte[])
 var bytesXml = File.ReadAllBytes("path/to/unsigned-debit-note.xml");
 var notaDebitoFirmada = firma.FirmarNotaDebito(bytesXml, fecha);
-
 // guardar xml firmado
 File.WriteAllBytes("path/to/signed-debit-note.xml", notaDebitoFirmada);
+
+
+// evento, variante 2:
+// firmar contenido xml (string)
+var xmlEvento = File.ReadAllText("path/to/unsigned-application-response.xml");
+var eventoFirmado = firma.FirmarEvento(xmlEvento, fecha);
+// guardar xml firmado
+File.WriteAllBytes("path/to/signed-application-response.xml");
 
 ```
 
