@@ -136,7 +136,7 @@ namespace eFacturacionColombia_V2.Firma
             xpathExpression.Namespaces.Add("sts", "dian:gov:co:facturaelectronica:Structures-2-1");
             xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
             xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
-            xpathExpression.XPathExpression = "/fe:ApplicationResponse/ext:UBLExtensions/ext:UBLExtension[1]/ext:ExtensionContent";
+            xpathExpression.XPathExpression = "/fe:ApplicationResponse/ext:UBLExtensions/ext:UBLExtension[2]/ext:ExtensionContent";
 
             return FirmarDocumento(bytesXml, fecha, xpathExpression);
         }

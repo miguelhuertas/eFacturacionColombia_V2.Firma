@@ -1,6 +1,6 @@
 # eFacturacionColombia_V2.Firma (C#)
 
-[![version](https://img.shields.io/badge/version-2.1-blue.svg)](#) [![build](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
+[![version](https://img.shields.io/badge/version-2.2-blue.svg)](#) [![build](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
 
 
 
@@ -35,7 +35,7 @@ var fecha = DateTime.Now;
 var archivoXml = new FileInfo("path/to/unsigned-invoice.xml");
 var facturaFirmada = firma.FirmarFactura(archivoXml, fecha);
 // guardar xml firmado
-File.WriteAllBytes(facturaFirmada, "path/to/signed-invoice.xml");
+File.WriteAllBytes("path/to/signed-invoice.xml", facturaFirmada);
 
 
 // nota de crédito, variante 2:
@@ -43,7 +43,7 @@ File.WriteAllBytes(facturaFirmada, "path/to/signed-invoice.xml");
 var contenidoXml = File.ReadAllText("path/to/unsigned-credit-note.xml");
 var notaCreditoFirmada = firma.FirmarNotaCredito(contenidoXml, fecha);
 // guardar xml firmado
-File.WriteAllBytes(notaCreditoFirmada, "path/to/signed-credit-note.xml");
+File.WriteAllBytes("path/to/signed-credit-note.xml", notaCreditoFirmada);
 
 
 // nota de débito, variante 3:
