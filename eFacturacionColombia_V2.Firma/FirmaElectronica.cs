@@ -17,6 +17,8 @@ namespace eFacturacionColombia_V2.Firma
 
         public string ClaveCertificado { get; set; }
 
+        public X509Certificate2 Certificado { get; set; }
+
 
         public byte[] FirmarFactura(FileInfo archivo, DateTime fecha)
         {
@@ -165,7 +167,7 @@ namespace eFacturacionColombia_V2.Firma
             parametros.SignaturePackaging = SignaturePackaging.ENVELOPED;
             parametros.DataFormat = new DataFormat { MimeType = "text/xml" };
 
-            using (parametros.Signer = new Signer(new X509Certificate2(RutaCertificado, ClaveCertificado)))
+            using (parametros.Signer = new Signer(Certificado ?? new X509Certificate2(RutaCertificado, ClaveCertificado)))
             {
                 using (var stream = new MemoryStream(bytesXml))
                 {

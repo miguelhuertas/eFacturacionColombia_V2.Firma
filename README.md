@@ -24,6 +24,9 @@ var firma = new FirmaElectronica
 	RolFirmante = RolFirmante.EMISOR,
 	RutaCertificado = "path/to/certificate.p12",
 	ClaveCertificado = "password here"
+	// también puedes optar por colocar tu certificado directamente:
+	// Certificado = new X509Certificate2(BYTES_CERTIFICADO, CLAVE_CERTIFICADO)
+	// útil cuando no almacenas los certificados en carpetas locales
 };
 
 // usar horario colombiano
