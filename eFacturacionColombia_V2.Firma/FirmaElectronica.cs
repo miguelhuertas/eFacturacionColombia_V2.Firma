@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -20,21 +20,21 @@ namespace eFacturacionColombia_V2.Firma
         public X509Certificate2 Certificado { get; set; }
 
 
-        public byte[] FirmarFactura(FileInfo archivo, DateTime fecha)
+        public byte[] FirmarFactura(FileInfo archivo, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = File.ReadAllBytes(archivo.FullName);
 
-            return FirmarFactura(bytesXml, fecha);
+            return FirmarFactura(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarFactura(string xml, DateTime fecha)
+        public byte[] FirmarFactura(string xml, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = Encoding.UTF8.GetBytes(xml);
 
-            return FirmarFactura(bytesXml, fecha);
+            return FirmarFactura(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarFactura(byte[] bytesXml, DateTime fecha)
+        public byte[] FirmarFactura(byte[] bytesXml, DateTime fecha, int numExtension = 2)
         {
             var xpathExpression = new SignatureXPathExpression();
             xpathExpression.Namespaces.Add("fe", "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2");
@@ -45,27 +45,27 @@ namespace eFacturacionColombia_V2.Firma
             xpathExpression.Namespaces.Add("sts", "dian:gov:co:facturaelectronica:Structures-2-1");
             xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
             xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
-            xpathExpression.XPathExpression = "/fe:Invoice/ext:UBLExtensions/ext:UBLExtension[2]/ext:ExtensionContent";
+            xpathExpression.XPathExpression = "/fe:Invoice/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
 
             return FirmarDocumento(bytesXml, fecha, xpathExpression);
         }
 
 
-        public byte[] FirmarNotaCredito(FileInfo archivo, DateTime fecha)
+        public byte[] FirmarNotaCredito(FileInfo archivo, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = File.ReadAllBytes(archivo.FullName);
 
-            return FirmarNotaCredito(bytesXml, fecha);
+            return FirmarNotaCredito(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarNotaCredito(string xml, DateTime fecha)
+        public byte[] FirmarNotaCredito(string xml, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = Encoding.UTF8.GetBytes(xml);
 
-            return FirmarNotaCredito(bytesXml, fecha);
+            return FirmarNotaCredito(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarNotaCredito(byte[] bytesXml, DateTime fecha)
+        public byte[] FirmarNotaCredito(byte[] bytesXml, DateTime fecha, int numExtension = 2)
         {
             var xpathExpression = new SignatureXPathExpression();
             xpathExpression.Namespaces.Add("fe", "urn:oasis:names:specification:ubl:schema:xsd:CreditNote-2");
@@ -76,27 +76,27 @@ namespace eFacturacionColombia_V2.Firma
             xpathExpression.Namespaces.Add("sts", "dian:gov:co:facturaelectronica:Structures-2-1");
             xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
             xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
-            xpathExpression.XPathExpression = "/fe:CreditNote/ext:UBLExtensions/ext:UBLExtension[2]/ext:ExtensionContent";
+            xpathExpression.XPathExpression = "/fe:CreditNote/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
 
             return FirmarDocumento(bytesXml, fecha, xpathExpression);
         }
 
 
-        public byte[] FirmarNotaDebito(FileInfo archivo, DateTime fecha)
+        public byte[] FirmarNotaDebito(FileInfo archivo, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = File.ReadAllBytes(archivo.FullName);
 
-            return FirmarNotaDebito(bytesXml, fecha);
+            return FirmarNotaDebito(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarNotaDebito(string xml, DateTime fecha)
+        public byte[] FirmarNotaDebito(string xml, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = Encoding.UTF8.GetBytes(xml);
 
-            return FirmarNotaDebito(bytesXml, fecha);
+            return FirmarNotaDebito(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarNotaDebito(byte[] bytesXml, DateTime fecha)
+        public byte[] FirmarNotaDebito(byte[] bytesXml, DateTime fecha, int numExtension = 2)
         {
             var xpathExpression = new SignatureXPathExpression();
             xpathExpression.Namespaces.Add("fe", "urn:oasis:names:specification:ubl:schema:xsd:DebitNote-2");
@@ -107,27 +107,27 @@ namespace eFacturacionColombia_V2.Firma
             xpathExpression.Namespaces.Add("sts", "dian:gov:co:facturaelectronica:Structures-2-1");
             xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
             xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
-            xpathExpression.XPathExpression = "/fe:DebitNote/ext:UBLExtensions/ext:UBLExtension[2]/ext:ExtensionContent";
+            xpathExpression.XPathExpression = "/fe:DebitNote/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
 
             return FirmarDocumento(bytesXml, fecha, xpathExpression);
         }
 
 
-        public byte[] FirmarEvento(FileInfo archivo, DateTime fecha)
+        public byte[] FirmarEvento(FileInfo archivo, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = File.ReadAllBytes(archivo.FullName);
 
-            return FirmarEvento(bytesXml, fecha);
+            return FirmarEvento(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarEvento(string xml, DateTime fecha)
+        public byte[] FirmarEvento(string xml, DateTime fecha, int numExtension = 2)
         {
             var bytesXml = Encoding.UTF8.GetBytes(xml);
 
-            return FirmarEvento(bytesXml, fecha);
+            return FirmarEvento(bytesXml, fecha, numExtension);
         }
 
-        public byte[] FirmarEvento(byte[] bytesXml, DateTime fecha)
+        public byte[] FirmarEvento(byte[] bytesXml, DateTime fecha, int numExtension = 2)
         {
             var xpathExpression = new SignatureXPathExpression();
             xpathExpression.Namespaces.Add("fe", "urn:oasis:names:specification:ubl:schema:xsd:ApplicationResponse-2");
@@ -138,7 +138,94 @@ namespace eFacturacionColombia_V2.Firma
             xpathExpression.Namespaces.Add("sts", "dian:gov:co:facturaelectronica:Structures-2-1");
             xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
             xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
-            xpathExpression.XPathExpression = "/fe:ApplicationResponse/ext:UBLExtensions/ext:UBLExtension[2]/ext:ExtensionContent";
+            xpathExpression.XPathExpression = "/fe:ApplicationResponse/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
+
+            return FirmarDocumento(bytesXml, fecha, xpathExpression);
+        }
+
+
+        public byte[] FirmarNominaIndividual(FileInfo archivo, DateTime fecha, int numExtension = 1)
+        {
+            var bytesXml = File.ReadAllBytes(archivo.FullName);
+
+            return FirmarNominaIndividual(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarNominaIndividual(string xml, DateTime fecha, int numExtension = 1)
+        {
+            var bytesXml = Encoding.UTF8.GetBytes(xml);
+
+            return FirmarNominaIndividual(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarNominaIndividual(byte[] bytesXml, DateTime fecha, int numExtension = 1)
+        {
+            var xpathExpression = new SignatureXPathExpression();
+            xpathExpression.Namespaces.Add("nei", "dian:gov:co:facturaelectronica:NominaIndividual");
+            xpathExpression.Namespaces.Add("ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+            xpathExpression.Namespaces.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
+            xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
+            xpathExpression.XPathExpression = "/nei:NominaIndividual/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
+
+            return FirmarDocumento(bytesXml, fecha, xpathExpression);
+        }
+
+
+        public byte[] FirmarAjusteNominaIndividual(FileInfo archivo, DateTime fecha, int numExtension = 1)
+        {
+            var bytesXml = File.ReadAllBytes(archivo.FullName);
+
+            return FirmarAjusteNominaIndividual(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarAjusteNominaIndividual(string xml, DateTime fecha, int numExtension = 1)
+        {
+            var bytesXml = Encoding.UTF8.GetBytes(xml);
+
+            return FirmarAjusteNominaIndividual(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarAjusteNominaIndividual(byte[] bytesXml, DateTime fecha, int numExtension = 1)
+        {
+            var xpathExpression = new SignatureXPathExpression();
+            xpathExpression.Namespaces.Add("anei", "dian:gov:co:facturaelectronica:NominaIndividualDeAjuste");
+            xpathExpression.Namespaces.Add("ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+            xpathExpression.Namespaces.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
+            xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
+            xpathExpression.XPathExpression = "/anei:NominaIndividualDeAjuste/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
+
+            return FirmarDocumento(bytesXml, fecha, xpathExpression);
+        }
+
+
+        public byte[] FirmarDocumentoSoporte(FileInfo archivo, DateTime fecha, int numExtension = 2)
+        {
+            var bytesXml = File.ReadAllBytes(archivo.FullName);
+
+            return FirmarDocumentoSoporte(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarDocumentoSoporte(string xml, DateTime fecha, int numExtension = 2)
+        {
+            var bytesXml = Encoding.UTF8.GetBytes(xml);
+
+            return FirmarDocumentoSoporte(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarDocumentoSoporte(byte[] bytesXml, DateTime fecha, int numExtension = 2)
+        {
+            var xpathExpression = new SignatureXPathExpression();
+            xpathExpression.Namespaces.Add("fe", "urn:oasis:names:specification:ubl:schema:xsd:Invoice-2");
+            xpathExpression.Namespaces.Add("cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            xpathExpression.Namespaces.Add("cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+            xpathExpression.Namespaces.Add("ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+            xpathExpression.Namespaces.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            xpathExpression.Namespaces.Add("sts", "dian:gov:co:facturaelectronica:Structures-2-1");
+            xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
+            xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
+            xpathExpression.XPathExpression = "/fe:Invoice/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
 
             return FirmarDocumento(bytesXml, fecha, xpathExpression);
         }

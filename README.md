@@ -1,16 +1,17 @@
 # eFacturacionColombia_V2.Firma (C#)
 
-[![version](https://img.shields.io/badge/version-2.2-blue.svg)](#) [![build](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
+[![version](https://img.shields.io/badge/version-3.0-blue.svg)](#) [![build](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
 
 
 
 **eFacturacionColombia_V2.Firma** es un módulo desarrollado en C#, que permite firmar los documentos XML (facturas, notas de crédito/débito y eventos) que se presentan a la DIAN de Colombia para el proceso de facturación electrónica (versión Validación Previa).
-
+También permite firmar los documentos relacionados a la nómina electrónica y el documento soporte.
 
 
 ### Uso
 
-La clase `FirmaElectronica` contiene un sencillo método (en tres variantes) para firmar cada uno de los documentos electrónicos; retorna un array de bytes correspondientes al documento firmado.
+La clase `FirmaElectronica` contiene un sencillo método (en tres variantes) para firmar cada uno de los documentos electrónicos; retorna un array de bytes correspondiente al documento firmado.
+El método permite, de manera opcional, que se le indique el índice del nodo `UBLExtension` donde se desea generar la firma (nodo `Signature`).
 
 ```csharp
 
@@ -35,32 +36,32 @@ var fecha = DateTime.Now;
 
 // factura, variante 1:
 // firmar archivo (FileInfo)
-var archivoXml = new FileInfo("path/to/unsigned-invoice.xml");
-var facturaFirmada = firma.FirmarFactura(archivoXml, fecha);
+var archivoFactura = new FileInfo("path/to/unsigned-invoice.xml");
+var bytesFacturaFirmada = firma.FirmarFactura(archivoFactura, fecha);
 // guardar xml firmado
-File.WriteAllBytes("path/to/signed-invoice.xml", facturaFirmada);
+File.WriteAllBytes("path/to/signed-invoice.xml", bytesFacturaFirmada);
 
 
 // nota de crédito, variante 2:
 // firmar contenido xml (string)
-var contenidoXml = File.ReadAllText("path/to/unsigned-credit-note.xml");
-var notaCreditoFirmada = firma.FirmarNotaCredito(contenidoXml, fecha);
+var xmlNotaCredito = File.ReadAllText("path/to/unsigned-credit-note.xml");
+var bytesNotaCreditoFirmada = firma.FirmarNotaCredito(xmlNotaCredito, fecha);
 // guardar xml firmado
-File.WriteAllBytes("path/to/signed-credit-note.xml", notaCreditoFirmada);
+File.WriteAllBytes("path/to/signed-credit-note.xml", bytesNotaCreditoFirmada);
 
 
 // nota de débito, variante 3:
 // firmar array de bytes (byte[])
-var bytesXml = File.ReadAllBytes("path/to/unsigned-debit-note.xml");
-var notaDebitoFirmada = firma.FirmarNotaDebito(bytesXml, fecha);
+var bytesNotaDebito = File.ReadAllBytes("path/to/unsigned-debit-note.xml");
+var bytesNotaDebitoFirmada = firma.FirmarNotaDebito(bytesNotaDebito, fecha);
 // guardar xml firmado
-File.WriteAllBytes("path/to/signed-debit-note.xml", notaDebitoFirmada);
+File.WriteAllBytes("path/to/signed-debit-note.xml", bytesNotaDebitoFirmada);
 
 
 // evento, variante 2:
 // firmar contenido xml (string)
 var xmlEvento = File.ReadAllText("path/to/unsigned-application-response.xml");
-var eventoFirmado = firma.FirmarEvento(xmlEvento, fecha);
+var bytesEventoFirmado = firma.FirmarEvento(bytesEventoFirmado, fecha);
 // guardar xml firmado
 File.WriteAllBytes("path/to/signed-application-response.xml", eventoFirmado);
 
