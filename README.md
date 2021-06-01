@@ -11,7 +11,7 @@ También permite firmar los documentos relacionados a la nómina electrónica y 
 ### Uso
 
 La clase `FirmaElectronica` contiene un sencillo método (en tres variantes) para firmar cada uno de los documentos electrónicos; retorna un array de bytes correspondiente al documento firmado.
-El método permite, de manera opcional, que se le indique el índice del nodo `UBLExtension` donde se desea generar la firma (nodo `Signature`).
+El método permite, de manera opcional, que se le indique el número de nodo `UBLExtension` donde se desea generar la firma (nodo `Signature`).
 
 ```csharp
 
