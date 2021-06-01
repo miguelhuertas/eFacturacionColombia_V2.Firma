@@ -231,6 +231,37 @@ namespace eFacturacionColombia_V2.Firma
         }
 
 
+        public byte[] FirmarContenedor(FileInfo archivo, DateTime fecha, int numExtension = 1)
+        {
+            var bytesXml = File.ReadAllBytes(archivo.FullName);
+
+            return FirmarContenedor(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarContenedor(string xml, DateTime fecha, int numExtension = 1)
+        {
+            var bytesXml = Encoding.UTF8.GetBytes(xml);
+
+            return FirmarContenedor(bytesXml, fecha, numExtension);
+        }
+
+        public byte[] FirmarContenedor(byte[] bytesXml, DateTime fecha, int numExtension = 1)
+        {
+            var xpathExpression = new SignatureXPathExpression();
+            xpathExpression.Namespaces.Add("fe", "urn:oasis:names:specification:ubl:schema:xsd:AttachedDocument-2");
+            xpathExpression.Namespaces.Add("cac", "urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2");
+            xpathExpression.Namespaces.Add("cbc", "urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2");
+            xpathExpression.Namespaces.Add("ext", "urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2");
+            xpathExpression.Namespaces.Add("xsi", "http://www.w3.org/2001/XMLSchema-instance");
+            xpathExpression.Namespaces.Add("sts", "dian:gov:co:facturaelectronica:Structures-2-1");
+            xpathExpression.Namespaces.Add("xades", "http://uri.etsi.org/01903/v1.3.2#");
+            xpathExpression.Namespaces.Add("xades141", "http://uri.etsi.org/01903/v1.4.1#");
+            xpathExpression.XPathExpression = "/fe:AttachedDocument/ext:UBLExtensions/ext:UBLExtension[" + numExtension + "]/ext:ExtensionContent";
+
+            return FirmarDocumento(bytesXml, fecha, xpathExpression);
+        }
+
+
         protected byte[] FirmarDocumento(byte[] bytesXml, DateTime fecha, SignatureXPathExpression xpathExpression)
         {
             var xadesService = new XadesService();
